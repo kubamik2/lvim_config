@@ -10,7 +10,7 @@ lvim.plugins = {
     },
     {
         'mrcjkb/rustaceanvim',
-        version = '^5', -- Recommended
+        version = '^6', -- Recommended
         lazy = false, -- This plugin is already lazy
         ft = { "rust" },
         opts = {
@@ -22,8 +22,7 @@ lvim.plugins = {
                             loadOutDirsFromCheck = true,
                             buildScripts = {
                                 enable = true
-                            },
-                            diagnostics = {
+                            }, diagnostics = {
                                 warningsAsHint = {"dead_code", "unused_variables"}
                             },
                             checkOnSave = true,
@@ -71,6 +70,8 @@ vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "rust_analyz
 vim.opt.tabstop = 4 -- tab size
 vim.opt.shiftwidth = 4
 
+vim.o.expandtab = true
+
 -- change some diagnostics
 vim.diagnostic.config({
     underline = {
@@ -98,3 +99,9 @@ vim.g.edge_style = "aura"
 
 -- allow duplicate autocomplete suggestions
 lvim.builtin.cmp.formatting.duplicates["nvim_lsp"] = 1
+
+-- disable format on save for zig
+vim.g.zig_fmt_autosave = 0
+
+vim.api.nvim_set_keymap("i", "<Tab>", "<Tab>", { noremap = true })
+lvim.builtin.cmp.mapping["<Tab>"] = nil
